@@ -91,6 +91,9 @@ import { MultiSeriesDynamicChartComponent } from './components/dynamic-charts/mu
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ApmModule, ApmService } from '@elastic/apm-rum-angular'
+
+
 
 @NgModule({
   declarations: [
@@ -182,7 +185,9 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ApmModule, 
+    BrowserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
