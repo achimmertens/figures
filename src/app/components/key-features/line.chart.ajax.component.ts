@@ -51,7 +51,7 @@ export class LineChartAjaxComponent implements AfterViewInit {
 
 
    // this.http.get('https://canvasjs.com/data/gallery/angular/btcusd2021.json', 
-    this.http.get('http://raspi:9200/leo/_search?&terminate_after=50&_source=id,symbol,price,timestamp', 
+    this.http.get('http://raspi:9200/leo/_search?size=1000&sort=timestamp:desc&_source=id,symbol,price,timestamp', 
     { responseType: 'json' })
     .subscribe((response: any) => {
       let data = response;
