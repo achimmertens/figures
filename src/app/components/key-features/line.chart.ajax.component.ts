@@ -18,7 +18,7 @@ export class LineChartAjaxComponent implements AfterViewInit {
     zoomEnabled: true,
     exportEnabled: true,
     title: {
-      text:"Bitcoin Closing Price"
+      text:"$LEO Price"
     },
     subtitles: [{
       text: "Loading Data...",
@@ -28,7 +28,7 @@ export class LineChartAjaxComponent implements AfterViewInit {
       dockInsidePlotArea: true
     }],
     axisY: {
-      title: "Closing Price (in USD)",
+      title: "Price (in $HIVE)",
       prefix: "$"
     },
     data: [{
@@ -69,10 +69,10 @@ export class LineChartAjaxComponent implements AfterViewInit {
        console.log("content = ", content);
        for(let i = 0; i < content.length; i++){
    
-       this.dataPoints.push({x: new Date(content[i]._source.timestamp), y: Number(content[i]._source.price) });
- 
-      console.log("Date: = ", content[i]._source.timestamp);
-       console.log("Price: = ", content[i]._source.price);
+       this.dataPoints.push({x: new Date(content[i]._source.timestamp*1000), y: Number(content[i]._source.price) });
+       console.log("Date Unix: = ", content[i]._source.timestamp*1000);
+      console.log("Date: = ", new Date(content[i]._source.timestamp*1000));
+       console.log("Price: = ", Number(content[i]._source.price));
        }
   
 
