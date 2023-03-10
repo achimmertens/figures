@@ -50,16 +50,32 @@ export class LineChartAjaxComponent implements AfterViewInit {
   ngAfterViewInit() {
 
 
-    this.http.get('https://canvasjs.com/data/gallery/angular/btcusd2021.json', 
-    //this.http.get('http://raspi:9200/leo/_search?&terminate_after=50&_source=id,symbol,price,timestamp', 
+   // this.http.get('https://canvasjs.com/data/gallery/angular/btcusd2021.json', 
+    this.http.get('http://raspi:9200/leo/_search?&terminate_after=50&_source=id,symbol,price,timestamp', 
     { responseType: 'json' })
     .subscribe((response: any) => {
       let data = response;
       console.log("response = ", response);
 
+      /*
        for(let i = 0; i < data.length; i++){
         this.dataPoints.push({x: new Date(data[i].date), y: Number(data[i].close) });
+       console.log("Date: = ", new Date(data[i].date));
+       console.log("Price: = ", Number(data[i].close));
        }
+*/
+  
+       let content = response.hits.hits;
+       console.log("content = ", content);
+       for(let i = 0; i < content.length; i++){
+   
+       this.dataPoints.push({x: new Date(content[i]._source.timestamp), y: Number(content[i]._source.price) });
+ 
+      console.log("Date: = ", content[i]._source.timestamp);
+       console.log("Price: = ", content[i]._source.price);
+       }
+  
+
        this.chart.subtitles[0].remove();
     });
   }	
